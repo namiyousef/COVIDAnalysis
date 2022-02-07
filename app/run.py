@@ -1,21 +1,6 @@
-import os
+from app import flask_app
 
-import connexion
-
-#from .web import encoder
-
-app = connexion.FlaskApp(__name__, specification_dir='api/specs/')
-app.add_api('api.yaml')
-
-
-flask_app = app.app
-
-
-@flask_app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-app.run(port=8000)
+flask_app.run(port=8000)
 """def create_app():
     abs_file_path = os.path.abspath(os.path.dirname(__file__))
     openapi_path = os.path.join(abs_file_path, "../", "../", "openapi")

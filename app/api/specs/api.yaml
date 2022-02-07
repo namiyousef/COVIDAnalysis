@@ -1,0 +1,80 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: My App
+
+paths:
+  /hello_world:
+    post:
+      tags:
+        - hello
+      operationId: api.views.hello_world
+      summary: Test api endpoint
+      responses:
+        200:
+          description: success
+  /echo_message:
+    post:
+      tags:
+        - echo
+      parameters:
+        - $ref: '#/components/parameters/Message'
+        - $ref: '#/components/parameters/Encrypt'
+        - $ref: '#/components/parameters/Repeat'
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+            example: Type a header message here!
+
+      operationId: api.views.echo_message
+      summary: echoes message back to the user
+      responses:
+        200:
+          description: success
+
+components:
+
+  # define parameters
+  parameters:
+    Message:
+      name: message
+      in: query
+      description: message to echo back to user
+      required: true
+      schema:
+        $ref: '#/components/schemas/Message'
+      example: My name is Yousef!
+    Encrypt:
+      name: encrypt
+      in: query
+      description: flag to enable encryption
+      required: false
+      schema:
+        $ref: '#/components/schemas/Encrypt'
+    Repeat:
+      name: repeat
+      in: query
+      description: number of times to repeat text
+      required: false
+      schema:
+        $ref: '#/components/schemas/Repeat'
+      example: 3
+
+  # define schemas
+  schemas:
+    Message:
+      type: string
+      default: Hello World
+    Encrypt:
+      type: boolean
+      default: false
+    Repeat:
+      type: integer
+      default: 1
+    FreeText:
+      type: string
+      default: Type header message!
+
+
